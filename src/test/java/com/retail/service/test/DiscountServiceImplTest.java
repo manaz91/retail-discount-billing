@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.retail.exception.ApiException;
+import com.retail.exception.CustomException;
 import com.retail.mock.MockBuilder;
 import com.retail.model.Item;
 import com.retail.model.User;
@@ -35,7 +35,7 @@ public class DiscountServiceImplTest {
 		User user = MockBuilder.getLoyalUser();
 		try {
 			Assert.assertEquals(761.00, discountService.calculatePayableAmount(user, items), 0);
-		} catch (ApiException e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 	}
@@ -45,7 +45,7 @@ public class DiscountServiceImplTest {
 		User user = MockBuilder.getNonLoyalUser();
 		try {
 			Assert.assertEquals(790.00, discountService.calculatePayableAmount(user, items), 0);
-		} catch (ApiException e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 	}
@@ -55,7 +55,7 @@ public class DiscountServiceImplTest {
 		User affiliateUser = MockBuilder.getAffiliateUser();
 		try {
 			Assert.assertEquals(737.00, discountService.calculatePayableAmount(affiliateUser, items), 0);
-		} catch (ApiException e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 	}
@@ -64,7 +64,7 @@ public class DiscountServiceImplTest {
 		User employeeUser = MockBuilder.getEmployeeUser();
 		try {
 			Assert.assertEquals(626.00, discountService.calculatePayableAmount(employeeUser, items), 0);
-		} catch (ApiException e) {
+		} catch (CustomException e) {
 			e.printStackTrace();
 		}
 	}

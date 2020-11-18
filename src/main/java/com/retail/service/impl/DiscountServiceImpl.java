@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.retail.constants.Constants;
 import com.retail.constants.ErrorConstants;
 import com.retail.enums.UserType;
-import com.retail.exception.ApiException;
+import com.retail.exception.CustomException;
 import com.retail.model.Item;
 import com.retail.model.User;
 import com.retail.service.DiscountService;
@@ -26,7 +26,7 @@ public class DiscountServiceImpl implements DiscountService {
 	 * response: double
 	 * throws ApiException
 	 * */
-	public double calculatePayableAmount(User user, List<Item> items) throws ApiException {
+	public double calculatePayableAmount(User user, List<Item> items) throws CustomException {
 		double totalDiscountedPrice = 0;
 		double discountPercentage = getDiscountForUser(user);
 		for(Item item:items) {
@@ -51,12 +51,12 @@ public class DiscountServiceImpl implements DiscountService {
 	 * response: double
 	 * throws ApiException
 	 * */
-	private double getDiscountBasedOnTotal(double totalDiscountedPrice) throws ApiException {
+	private double getDiscountBasedOnTotal(double totalDiscountedPrice) throws CustomException {
 		try {
 			return Math.floor(totalDiscountedPrice / 100) * Constants.DISCOUNT_PER_HUNDRED;
 		} catch(Exception e) {
 	        logger.error(e.getMessage());
-			throw new ApiException(ErrorConstants.SERVICE_EXCEPTION);
+			throw new CustomException(ErrorConstants.SERVICE_EXCEPTION);
 		}
 	}
 }
